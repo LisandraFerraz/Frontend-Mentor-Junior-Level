@@ -56,7 +56,6 @@ function App() {
       setResult(() => [caughtIp]);
     } catch (error) {
       window.alert("The information provided did not return any results.");
-      console.log("balls " + error);
     }
   }
 
