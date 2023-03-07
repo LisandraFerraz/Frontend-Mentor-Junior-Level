@@ -1,5 +1,5 @@
 import "./styles.css";
-import React from "react";
+import React, { useReducer } from "react";
 import { LocalDetailsCard } from "./components/local-details-card";
 import seach_btn_img from "./assets/icons/icon-arrow.svg";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
@@ -9,34 +9,55 @@ import { useState } from "react";
 
 function App() {
   const url =
-    "https://geo.ipify.org/api/v2/country,city?apiKey=at_l7U1E8uBWMd8MW69BTH2u2SrtmbC0&ipAddress=";
+    "https://geo.ipify.org/api/v2/country,city?apiKey=at_l7U1E8uBWMd8MW69BTH2u2SrtmbC0&";
 
-  const [ipAdress, setIpAdress] = useState<any>();
+  const [adressType, setadressType] = useState<any>();
   const [result, setResult] = useState<any>();
   const [geoLocation, setGeoLocation] = useState<any>();
 
+  const [_, updateMap] = useReducer((x) => x + 1, 0);
+
   const boom = Math.random();
 
-  async function searchLocation() {
-    const res = await fetch(url + ipAdress);
-    const data = await res.json();
+  function checkSearchType() {
+    const typeFilter = Number(adressType.charAt(0));
+    const isNumber = Number.isNaN(typeFilter);
 
-    const caughtIp = {
-      region: `${data.location.region}, ${data.location.country}`,
-      timezone: data.location.timezone,
-      ip: data.ip,
-      isp: data.isp,
-    };
+    switch (isNumber) {
+      case !isNumber:
+        searchLocation("ipAddress=" + adressType);
+        break;
 
-    const getGeoLocation = {
-      lat: data.location.lat,
-      lng: data.location.lng,
-    };
+      default:
+        searchLocation("domain=" + adressType);
+        break;
+    }
+    updateMap();
+  }
 
-    setGeoLocation(() => [getGeoLocation]);
-    setResult(() => [caughtIp]);
+  async function searchLocation(urlParam: any) {
+    try {
+      const res = await fetch(url + urlParam);
+      const data = await res.json();
 
-    console.log(getGeoLocation.lat);
+      const caughtIp = {
+        region: `${data.location.region}, ${data.location.country}`,
+        timezone: data.location.timezone,
+        ip: data.ip,
+        isp: data.isp,
+      };
+
+      const getGeoLocation = {
+        lat: data.location.lat,
+        lng: data.location.lng,
+      };
+
+      setGeoLocation(() => [getGeoLocation]);
+      setResult(() => [caughtIp]);
+    } catch (error) {
+      window.alert("The information provided did not return any results.");
+      console.log("balls " + error);
+    }
   }
 
   return (
@@ -45,11 +66,11 @@ function App() {
         <h1>IP Adress Tracker</h1>
         <div className="search-container">
           <input
-            onChange={(i) => setIpAdress(i.target.value)}
+            onChange={(i) => setadressType(i.target.value)}
             type="text"
             placeholder="Search for any IP adress or domain"
           />
-          <button onClick={searchLocation}>
+          <button onClick={checkSearchType}>
             <img src={seach_btn_img} alt="" />
           </button>
         </div>
@@ -78,6 +99,7 @@ function App() {
       {geoLocation ? (
         geoLocation.map((r: any) => (
           <MapContainer
+            key={r.lat}
             center={[r.lat, r.lng]}
             zoom={100}
             scrollWheelZoom={false}
@@ -88,7 +110,6 @@ function App() {
             />
             <Marker
               position={[r.lat, r.lng]}
-              s
               icon={
                 new Icon({
                   iconUrl: localmark,
@@ -100,8 +121,8 @@ function App() {
           </MapContainer>
         ))
       ) : (
-        <div>
-          <p>Nothing to see here.</p>;
+        <div className="empty-map">
+          <h2>Start searching by either an IP adress or domain!</h2>
         </div>
       )}
     </div>
