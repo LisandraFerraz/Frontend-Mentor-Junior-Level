@@ -2,7 +2,7 @@ import "./styles.css";
 import React, { useReducer } from "react";
 import { LocalDetailsCard } from "./components/local-details-card";
 import seach_btn_img from "./assets/icons/icon-arrow.svg";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import { Icon } from "leaflet";
 import localmark from "./assets/icons/icon-location.svg";
 import { useState } from "react";
@@ -15,9 +15,19 @@ function App() {
   const [result, setResult] = useState<any>();
   const [geoLocation, setGeoLocation] = useState<any>();
 
-  const [_, updateMap] = useReducer((x) => x + 1, 0);
-
   const boom = Math.random();
+
+  // const [_, updateMap] = useReducer((x) => x + 1, 0);
+  const ChangeMapView = ({
+    coords,
+  }: {
+    coords: [lat: number, lng: number];
+  }) => {
+    const map = useMap();
+    map.setView(coords, map.getZoom());
+
+    return null;
+  };
 
   function checkSearchType() {
     const typeFilter = Number(adressType.charAt(0));
@@ -32,7 +42,6 @@ function App() {
         searchLocation("domain=" + adressType);
         break;
     }
-    updateMap();
   }
 
   async function searchLocation(urlParam: any) {
@@ -70,7 +79,7 @@ function App() {
             placeholder="Search for any IP adress or domain"
           />
           <button onClick={checkSearchType}>
-            <img src={seach_btn_img} alt="" />
+            <img src={seach_btn_img} alt="Search" />
           </button>
         </div>
       </div>
@@ -117,6 +126,7 @@ function App() {
                 })
               }
             />
+            <ChangeMapView coords={[r.lat, r.lng]} />
           </MapContainer>
         ))
       ) : (
