@@ -14,11 +14,6 @@ import SectionTitle from "../section-title";
 import playIcon from "./../../assets/icons/player_icon.svg";
 import "./styles.scss";
 
-// interface paramsDictionary{
-//     word: string,
-
-// }
-
 export default function WordDetails(params: any) {
   return (
     <Flex flexDirection={"column"}>
@@ -51,40 +46,13 @@ export default function WordDetails(params: any) {
         </Box>
       </Flex>
 
-      <SectionTitle secTitle="noun" />
+      {/* <SectionTitle secTitle="noun" /> */}
 
-      <Flex flexDirection="column" marginTop="30px">
-        <Text color="#2E2E2E80" fontWeight="semibold">
-          Meaning
-        </Text>
-        <UnorderedList
-          marginLeft="35px"
-          marginTop="30px"
-          spacing={4}
-          color="#2E2E2E"
-        >
-          <ListItem>Lorem ipsum dolor sit amet</ListItem>
-        </UnorderedList>
-      </Flex>
       <Flex alignItems="baseline" gap="3">
         <Text marginTop="40px" color="#2E2E2E80" fontWeight="semibold">
           Synonyms
         </Text>
         <span>smth</span>
-      </Flex>
-      <SectionTitle secTitle="verb" />
-      <Flex flexDirection="column" marginTop="30px">
-        <Text color="#2E2E2E80" fontWeight="semibold">
-          Meaning
-        </Text>
-        <UnorderedList
-          marginLeft="35px"
-          marginTop="30px"
-          spacing={4}
-          color="#2E2E2E"
-        >
-          <ListItem>Lorem ipsum dolor sit amet</ListItem>
-        </UnorderedList>
       </Flex>
     </Flex>
   );

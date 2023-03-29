@@ -5,6 +5,8 @@ import {
   InputGroup,
   Image,
   InputRightElement,
+  ListItem,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.scss";
@@ -13,42 +15,58 @@ import AppHeader from "./components/header";
 
 import searchIcon from "./assets/icons/search_ icon.svg";
 import WordDetails from "./components/word-details";
+import SectionTitle from "./components/section-title";
 
 function App() {
   let [word, setWord] = useState();
   let [wordDetails, setWordDetails] = useState<any>([]);
   let [wordMeanings, setWordMeanings] = useState<any>([]);
 
+  const toast = useToast({
+    title: "Word not found.",
+    variant: "variant",
+    isClosable: true,
+    status: "error",
+    containerStyle: {
+      backgroundColor: "#A747ED",
+      color: "#fff",
+      borderRadius: "15px",
+    },
+  });
+
   function defineWord(word: any) {
     setWord(word.target.value);
   }
 
   function searchWord() {
-    // console.log(word);
-
     async function subscribeSearch() {
-      let url = await fetch(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-      );
-      let data = await url.json();
+      try {
+        let url = await fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        );
+        let data = await url.json();
 
-      // verificar uma forma de gerar as secoes para cada meaning
-      console.log(data[0].meanings.partOfSpeech);
+        let getWordDefinition = {
+          phonetic: data[0].phonetic,
+          word: data[0].word,
+        };
 
-      let getWordDefinition = {
-        phonetic: data[0].phonetic,
-        word: data[0].word,
-      };
+        let getWordMeanings = {
+          meaning1: data[0].meanings[0],
+          meaning2: data[0].meanings[1],
+          meaning3: data[0].meanings[2],
+          meaning4: data[0].meanings[3],
+        };
 
-      let getWordMeanings = {
-        noun: data[0].meanings[0],
-        verb: data[0].meanings[1],
-      };
-
-      setWordDetails(() => [getWordDefinition]);
-      console.log(wordDetails);
+        setWordDetails(() => [getWordDefinition]);
+        setWordMeanings(() => [getWordMeanings]);
+        // console.log(getWordMeanings.meaning1.definitions);
+        console.log(data.title);
+      } catch (e) {
+        toast();
+        console.log(e);
+      }
     }
-
     subscribeSearch();
   }
 
@@ -96,6 +114,52 @@ function App() {
             word={resp.word}
             phonetic={resp.phonetic}
           />
+        );
+      })}
+
+      {wordMeanings?.map((t: any) => {
+        return (
+          <>
+            {t.meaning1 ? (
+              <SectionTitle
+                key={t.meaning1.partOfSpeech}
+                secTitle={t.meaning1.partOfSpeech}
+                definitions={t.meaning1.definitions}
+              />
+            ) : (
+              ""
+            )}
+
+            {t.meaning2 ? (
+              <SectionTitle
+                key={t.meaning2.partOfSpeech}
+                secTitle={t.meaning2.partOfSpeech}
+                definitions={t.meaning2.definitions}
+              />
+            ) : (
+              ""
+            )}
+
+            {t.meanin4 ? (
+              <SectionTitle
+                key={t.meaning3.partOfSpeech}
+                secTitle={t.meaning3.partOfSpeech}
+                definitions={t.meaning3.definitions}
+              />
+            ) : (
+              ""
+            )}
+
+            {t.meaning4 ? (
+              <SectionTitle
+                key={t.meaning4.partOfSpeech}
+                secTitle={t.meaning4.partOfSpeech}
+                definitions={t.meaning4.definitions}
+              />
+            ) : (
+              ""
+            )}
+          </>
         );
       })}
     </Flex>
