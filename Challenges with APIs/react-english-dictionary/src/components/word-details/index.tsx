@@ -1,20 +1,23 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Text,
-  Image,
-  Spacer,
-  Divider,
-  UnorderedList,
-  ListItem,
-} from "@chakra-ui/react";
-import SectionTitle from "../section-title";
+import { Box, Button, Flex, Text, Image, Spacer } from "@chakra-ui/react";
 
 import playIcon from "./../../assets/icons/player_icon.svg";
 import "./styles.scss";
 
 export default function WordDetails(params: any) {
+  const synonyms = params.synonyms;
+
+  function playAudio() {
+    let audio = new Audio(params.audioSource);
+
+    console.log(audio.src.slice(-3));
+
+    if (audio.src.slice(-3) === "mp3") {
+      audio.play();
+    } else {
+      console.log("balls");
+    }
+  }
+
   return (
     <Flex flexDirection={"column"}>
       <Flex minWidth="800px" flexDirection={"row"} alignItems="center">
@@ -24,7 +27,6 @@ export default function WordDetails(params: any) {
             fontFamily={"default"}
             fontWeight="bold"
             textTransform={"lowercase"}
-            color="#2E2E2E"
           >
             {params.word}
           </Text>
@@ -40,19 +42,32 @@ export default function WordDetails(params: any) {
             borderRadius="100%"
             height="50px"
             width="50px"
+            onClick={playAudio}
           >
+            {/* <div>
+              <audio controls src={params.audioSource} />
+            </div> */}
             <Image src={playIcon} />
           </Button>
         </Box>
       </Flex>
 
-      {/* <SectionTitle secTitle="noun" /> */}
-
       <Flex alignItems="baseline" gap="3">
-        <Text marginTop="40px" color="#2E2E2E80" fontWeight="semibold">
+        <Text marginTop="40px" opacity={"60%"} fontWeight="semibold">
           Synonyms
         </Text>
-        <span>smth</span>
+        {synonyms?.map((resp: any) => {
+          return (
+            <Text
+              textTransform={"lowercase"}
+              fontWeight={"extrabold"}
+              color={"#a747ed"}
+              key={resp}
+            >
+              {resp}
+            </Text>
+          );
+        })}
       </Flex>
     </Flex>
   );

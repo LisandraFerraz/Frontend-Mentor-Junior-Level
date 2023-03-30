@@ -1,7 +1,5 @@
 import {
   Box,
-  Button,
-  ButtonGroup,
   Divider,
   Flex,
   Image,
@@ -14,9 +12,17 @@ import "./styles.scss";
 
 import bookIcon from "./../../assets/icons/book_icon.svg";
 import moonIcon from "./../../assets/icons/moon_ icon.svg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-export default function AppHeader() {
+import { ThemeContext } from "styled-components";
+
+interface Props {
+  toggleTheme(): void;
+}
+
+export default function AppHeader(props: Props) {
+  const { colors, title } = useContext(ThemeContext);
+
   let [fontType, setFontType] = useState("");
 
   function switchFont(e: any) {
@@ -41,8 +47,7 @@ export default function AppHeader() {
       <Stack direction="row">
         <Flex gap="20px">
           <Select
-            focusBorderColor="#E9D0FA"
-            color={"#848484"}
+            focusBorderColor="transparent"
             border="none"
             minWidth="80px"
             maxWidth="fit-content"
@@ -55,7 +60,11 @@ export default function AppHeader() {
           </Select>
           <Divider orientation="vertical" />
           <Flex alignItems="center" gap="3">
-            <Switch colorScheme="purple" />
+            <Switch
+              colorScheme="purple"
+              onChange={props.toggleTheme}
+              checked={title == "dark"}
+            />
             <Image src={moonIcon} boxSize="22px" />
           </Flex>
         </Flex>
