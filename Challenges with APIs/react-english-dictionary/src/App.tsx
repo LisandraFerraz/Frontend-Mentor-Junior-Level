@@ -8,6 +8,7 @@ import {
   Divider,
   Text,
   Link,
+  Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.scss";
@@ -81,7 +82,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Flex flexDirection="column" alignItems="center" marginY="40px">
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        marginY="40px"
+        position="relative"
+      >
         <GlobalStyle />
         <AppHeader toggleTheme={toggleTheme} />
         <Flex
@@ -180,7 +186,7 @@ export default function App() {
               orientation="horizontal"
             />
             <Flex
-              gap={"5"}
+              gap={"2"}
               w={[380, 480, 700, 800]}
               fontSize="14px"
               marginTop={"30px"}
@@ -193,6 +199,22 @@ export default function App() {
               </Link>
             </Flex>
           </>
+        ) : (
+          <></>
+        )}
+        {wordDetails.length ? (
+          <Flex fontSize="14px" w={[380, 480, 700, 800]} gap={"2"}>
+            <Text opacity={"60%"} fontWeight="bold">
+              By:
+            </Text>
+            <Link
+              href="https://github.com/LisandraFerraz"
+              isExternal
+              textDecoration={"underline"}
+            >
+              Lisandra Ferraz
+            </Link>
+          </Flex>
         ) : (
           <></>
         )}
