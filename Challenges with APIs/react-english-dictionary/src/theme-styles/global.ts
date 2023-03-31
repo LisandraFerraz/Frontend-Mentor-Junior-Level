@@ -14,4 +14,7 @@ export default createGlobalStyle`
         background: ${(props: any) => props.theme.colors.secondary};
         color: ${(props: any) => props.theme.colors.text};
         border: ${(props: any) => props.theme.colors.border};
+    }
+     option{
+        background: ${(props: any) => props.theme.colors.background} !important;
     }`;

@@ -5,7 +5,6 @@ import {
   InputGroup,
   Image,
   InputRightElement,
-  useToast,
   Divider,
   Text,
   Link,
@@ -22,8 +21,9 @@ import AppHeader from "./components/header";
 import searchIcon from "./assets/icons/search_ icon.svg";
 import WordDetails from "./components/word-details";
 import SectionTitle from "./components/section-title";
+import { toastMessage } from "./components/toast";
 
-function App() {
+export default function App() {
   const [theme, setTheme] = useState(light);
 
   let [word, setWord] = useState();
@@ -35,23 +35,19 @@ function App() {
     setTheme(theme.title == "light" ? dark : light);
   };
 
-  const toast = useToast({
-    title: "Word not found.",
-    variant: "variant",
-    isClosable: true,
-    status: "error",
-    containerStyle: {
-      backgroundColor: "#A747ED",
-      color: "#fff",
-      borderRadius: "15px",
-    },
-  });
+  const { newToast } = toastMessage();
 
   function defineWord(word: any) {
     setWord(word.target.value);
   }
 
   function searchWord() {
+    if (!word) {
+      return newToast({
+        title: "Please insert a word first.",
+        color: "#eb4034",
+      });
+    }
     async function subscribeSearch() {
       try {
         let url = await fetch(
@@ -63,7 +59,6 @@ function App() {
           phonetic: data[0].phonetic,
           word: data[0].word,
           synonyms: data[0].meanings[0].synonyms,
-          // try to find a way to get the one with the mp3
           audio: data[0].phonetics[0].audio,
         };
 
@@ -77,11 +72,8 @@ function App() {
         setWordDetails(() => [getWordDefinition]);
         setWordMeanings(() => [getWordMeanings]);
         setLicense(() => data[0].sourceUrls[0]);
-
-        console.log(data[0].phonetics);
       } catch (e) {
-        toast();
-        console.log(e);
+        return newToast({ title: "Word not found.", color: "#A747ED" });
       }
     }
     subscribeSearch();
@@ -95,7 +87,7 @@ function App() {
         <Flex
           marginY="45px"
           flexDirection={"row"}
-          minWidth="800px"
+          w={[380, 480, 700, 800]}
           align={"center"}
         >
           <InputGroup>
@@ -124,10 +116,10 @@ function App() {
             </InputRightElement>
           </InputGroup>
         </Flex>
-        {wordDetails?.map((resp: any) => {
+        {wordDetails?.map((resp: any, i: number) => {
           return (
             <WordDetails
-              key={resp.word}
+              key={i}
               word={resp.word}
               phonetic={resp.phonetic}
               synonyms={resp.synonyms}
@@ -145,7 +137,7 @@ function App() {
                   definitions={t.meaning1.definitions}
                 />
               ) : (
-                ""
+                <></>
               )}
 
               {t.meaning2 ? (
@@ -155,17 +147,17 @@ function App() {
                   definitions={t.meaning2.definitions}
                 />
               ) : (
-                ""
+                <></>
               )}
 
-              {t.meanin4 ? (
+              {t.meaning3 ? (
                 <SectionTitle
                   key={t.meaning3.partOfSpeech}
                   secTitle={t.meaning3.partOfSpeech}
                   definitions={t.meaning3.definitions}
                 />
               ) : (
-                ""
+                <></>
               )}
 
               {t.meaning4 ? (
@@ -175,7 +167,7 @@ function App() {
                   definitions={t.meaning4.definitions}
                 />
               ) : (
-                ""
+                <></>
               )}
             </>
           );
@@ -183,11 +175,16 @@ function App() {
         {license ? (
           <>
             <Divider
-              width={"800px"}
+              w={[380, 480, 700, 800]}
               marginTop="50px"
               orientation="horizontal"
             />
-            <Flex gap={"5"} width="800px" marginTop={"30px"}>
+            <Flex
+              gap={"5"}
+              w={[380, 480, 700, 800]}
+              fontSize="14px"
+              marginTop={"30px"}
+            >
               <Text opacity={"60%"} fontWeight="bold">
                 Source:
               </Text>
@@ -203,5 +200,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

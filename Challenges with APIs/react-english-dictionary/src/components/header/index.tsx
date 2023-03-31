@@ -11,7 +11,9 @@ import {
 import "./styles.scss";
 
 import bookIcon from "./../../assets/icons/book_icon.svg";
-import moonIcon from "./../../assets/icons/moon_ icon.svg";
+import darkbBookIcon from "./../../assets/icons/dark_book_icon.svg";
+import moonIcon from "./../../assets/icons/moon_icon.svg";
+import sunIcon from "./../../assets/icons/sun_icon.svg";
 import { useContext, useEffect, useState } from "react";
 
 import { ThemeContext } from "styled-components";
@@ -39,9 +41,13 @@ export default function AppHeader(props: Props) {
   }, []);
 
   return (
-    <Flex minWidth="800px" alignItems="center" gap="2">
+    <Flex w={[380, 480, 700, 800]} alignItems="center" gap="2">
       <Box>
-        <Image src={bookIcon} boxSize="36px" />
+        {colors.background == "#fff" ? (
+          <Image src={bookIcon} boxSize="36px" />
+        ) : (
+          <Image src={darkbBookIcon} boxSize="36px" />
+        )}
       </Box>
       <Spacer />
       <Stack direction="row">
@@ -65,7 +71,11 @@ export default function AppHeader(props: Props) {
               onChange={props.toggleTheme}
               checked={title == "dark"}
             />
-            <Image src={moonIcon} boxSize="22px" />
+            {colors.background == "#fff" ? (
+              <Image src={moonIcon} boxSize="22px" />
+            ) : (
+              <Image src={sunIcon} boxSize="22px" />
+            )}
           </Flex>
         </Flex>
       </Stack>

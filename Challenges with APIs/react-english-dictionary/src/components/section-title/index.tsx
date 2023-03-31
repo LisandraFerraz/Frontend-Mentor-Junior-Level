@@ -9,7 +9,7 @@ export default function SectionTitle(params: any) {
     <>
       <Flex
         marginTop="30px"
-        minWidth={"800px"}
+        w={[380, 480, 700, 800]}
         flexDirection="row"
         alignItems="center"
         gap="5"
@@ -19,7 +19,7 @@ export default function SectionTitle(params: any) {
         </Text>
         <Divider orientation="horizontal" marginTop="10px" />
       </Flex>
-      <Flex flexDirection="column" width={"800px"} marginTop="30px">
+      <Flex flexDirection="column" w={[380, 480, 700, 800]} marginTop="30px">
         <Text opacity={"60%"} fontWeight="semibold">
           Meaning
         </Text>
