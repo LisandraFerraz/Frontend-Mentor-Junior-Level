@@ -14,7 +14,7 @@ export default function WordDetails(params: any) {
     if (audio.src.slice(-3) === "mp3") {
       audio.play();
     } else {
-      newToast({ title: "No audio available for this one!" });
+      newToast({ title: "No audio available for this one!", color: "#eb4034" });
     }
   }
 
