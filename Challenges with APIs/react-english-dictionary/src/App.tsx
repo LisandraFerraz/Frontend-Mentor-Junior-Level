@@ -99,7 +99,7 @@ export default function App() {
           <InputGroup>
             <Input
               className="search-word-input"
-              placeholder="keyboard..."
+              placeholder="Hello..."
               borderRadius="12px"
               backgroundColor="#f4f4f425"
               focusBorderColor="#E9D0FA"
