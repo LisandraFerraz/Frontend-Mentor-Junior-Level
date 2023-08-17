@@ -1,0 +1,22 @@
+/* style variables */
+$dark-violet: #2b272f;
+$very-dark-violet: #2d2640;
+$grayish-blue: #95a9c6;
+$dark-grayish-violet: #837d87;
+$very-light-gray: #848484;
+$default-white: #fafafa;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  background-color: $default-white;
+
+  ul > * {
+    list-style: none;
+  }
+}

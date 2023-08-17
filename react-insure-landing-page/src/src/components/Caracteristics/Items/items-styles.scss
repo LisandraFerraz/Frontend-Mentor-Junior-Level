@@ -1,0 +1,32 @@
+.caracItem {
+  h4 {
+    font-size: 1.6rem;
+    margin: 20px 0 0 0;
+    font-weight: 400;
+    font-family: "DM Serif Display";
+    color: #2b272f;
+  }
+  p {
+    font-family: "Karla";
+    color: #848484;
+    line-height: 25px;
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .caracItem {
+    img {
+      height: 80px;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .caracItem {
+    text-align: center;
+  }
+}

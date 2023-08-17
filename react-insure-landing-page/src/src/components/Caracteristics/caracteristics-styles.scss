@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  //   align-items: center;
+  margin: 260px 180px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+
+    &__line {
+      width: 160px;
+      height: 1px;
+      background-color: #837d87;
+    }
+
+    h1 {
+      font-family: "DM Serif Display";
+      font-weight: 400;
+      font-size: 5rem;
+      color: #2b272f;
+      margin: 30px 0 60px 0;
+    }
+  }
+
+  .container__itemsGroup {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    // flex-direction: row;
+    gap: 40px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .container {
+    margin: 260px 80px;
+
+    &__title {
+      h1 {
+        font-size: 4rem;
+        margin: 30px 0 50px 0;
+      }
+    }
+  }
+
+  .container__itemsGroup {
+    gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    margin: 100px 40px;
+
+    .container__itemsGroup {
+      gap: 20px;
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .container {
+    .container__itemsGroup {
+      gap: 20px;
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .container {
+    .container__itemsGroup {
+      gap: 20px;
+      grid-template-columns: repeat(1, auto);
+    }
+
+    &__title {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h1 {
+        font-size: 3.5rem;
+        margin: 30px 0 60px 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .container__title {
+    h1 {
+      font-size: 2.5rem;
+      margin: 30px 0 60px 0;
+    }
+  }
+}

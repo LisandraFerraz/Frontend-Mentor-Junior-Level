@@ -1,0 +1,118 @@
+.header {
+  padding: 10px 0;
+  gap: 30%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: #fafafa;
+  justify-content: space-around;
+  z-index: 1;
+  position: relative;
+
+  &__logo {
+    &__menu-toggle {
+      display: none;
+      width: fit-content;
+    }
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+
+    &__item {
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      color: #2b272f;
+      font-family: "Karla", sans-serif;
+      opacity: 50%;
+      font-weight: 600;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .header {
+    padding: 30px 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__logo {
+      display: flex;
+      flex-direction: row;
+      gap: 40%;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+
+      &__menu-toggle {
+        display: block;
+        padding: 0;
+        line-height: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
+
+    &__items {
+      // position: absolute;
+      padding: 50px 1px;
+      background: #2b272f url("./../../assets/bg-pattern-mobile-nav.svg") bottom
+        no-repeat;
+      background-size: contain;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      top: 80px;
+      height: 80vh;
+      width: 100%;
+
+      &--mobile-close {
+        display: none;
+      }
+
+      &__item {
+        color: #fafafa;
+        opacity: 1;
+        font-size: 1.3rem;
+        margin: 10px 0;
+        font-family: "Karla", sans-serif;
+      }
+
+      button {
+        padding: 10px 25px;
+        width: 90%;
+        font-size: 1.3rem;
+        height: 50px;
+        border: 2px solid #fff;
+        font-weight: normal;
+        color: #fff;
+        font-family: "Karla", sans-serif;
+
+        &:hover {
+          background-color: #2b272f;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

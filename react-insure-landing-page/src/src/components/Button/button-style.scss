@@ -1,0 +1,33 @@
+button {
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  padding: 10px 25px;
+  background-color: transparent;
+  font-weight: bold;
+  width: 150px;
+  height: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button_dark {
+  border: 2px solid #2b272f;
+  color: #2b272f;
+
+  &:hover {
+    background-color: #2b272f;
+    color: #fafafa;
+  }
+}
+
+.button_light {
+  border: 2px solid #fafafa;
+  color: #fafafa;
+
+  &:hover {
+    background-color: #fafafa;
+    color: #2b272f;
+  }
+}

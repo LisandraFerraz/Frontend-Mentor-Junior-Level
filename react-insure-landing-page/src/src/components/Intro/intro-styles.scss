@@ -1,0 +1,302 @@
+.image-intro-mobile {
+  display: none;
+}
+
+.intro {
+  height: 700px;
+  font-family: "DM Serif Display";
+  color: #fafafa;
+  background-color: #2d2640;
+  position: relative;
+
+  &__pattern--right {
+    position: absolute;
+    top: -100px;
+    right: 0;
+    height: 730px;
+  }
+
+  &__pattern--right--mobile {
+    display: none;
+  }
+
+  &__pattern--left {
+    position: absolute;
+    top: 530px;
+    left: 0;
+    height: 490px;
+  }
+
+  &__pattern--left--mobile {
+    display: none;
+  }
+  &__pattern--right--mobile {
+    display: none;
+  }
+
+  &__image--intro {
+    position: absolute;
+    top: 115px;
+    right: 200px;
+    background-size: cover;
+    display: flex;
+  }
+
+  &__text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    padding: 0 0 0 180px;
+
+    &__line {
+      width: 220px;
+      height: 1px;
+      background-color: #fafafa;
+      margin-bottom: 80px;
+    }
+
+    h1 {
+      font-size: 6rem;
+      font-weight: 400;
+      margin: 0 0 20px 0;
+      line-height: 80px;
+    }
+
+    p {
+      font-family: "Karla";
+      font-size: 1.3rem;
+      font-weight: 400;
+      line-height: 40px;
+      width: 45%;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1750px) {
+  .intro {
+    &__image--intro {
+      right: 200px;
+      height: 700px;
+    }
+
+    &__text {
+      padding: 0 0 0 150px;
+
+      h1 {
+        font-size: 5rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1560px) {
+  .intro {
+    height: 600px;
+
+    &__image--intro {
+      right: 200px;
+      height: 600px;
+    }
+
+    &__pattern--right {
+      height: 600px;
+    }
+
+    &__pattern--left {
+      top: 480px;
+      height: 400px;
+    }
+
+    &__text {
+      padding: 0 0 0 100px;
+
+      h1 {
+        line-height: 80px;
+        font-size: 5rem;
+      }
+
+      p {
+        line-height: 30px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1370px) {
+  .intro {
+    height: 600px;
+
+    &__image--intro {
+      right: 80px;
+      height: 600px;
+    }
+
+    &__pattern--right {
+      height: 600px;
+    }
+
+    &__pattern--left {
+      top: 480px;
+      height: 300px;
+    }
+
+    &__text {
+      padding: 0 0 0 80px;
+
+      h1 {
+        line-height: 50px;
+        font-size: 3rem;
+      }
+
+      p {
+        line-height: 30px;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1120px) {
+  .intro {
+    height: 500px;
+
+    &__image--intro {
+      right: 80px;
+      height: 540px;
+    }
+
+    &__pattern--right {
+      height: 550px;
+    }
+
+    &__pattern--left {
+      position: absolute;
+      top: 430px;
+      left: 0;
+      height: 300px;
+    }
+
+    &__text {
+      padding: 0 0 0 60px;
+
+      h1 {
+        line-height: 50px;
+        font-size: 3rem;
+      }
+
+      p {
+        line-height: 25px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .intro {
+    height: 450px;
+
+    &__image--intro {
+      right: 80px;
+      height: 440px;
+    }
+
+    &__pattern--right {
+      height: 480px;
+    }
+
+    &__pattern--left {
+      top: 380px;
+      height: 280px;
+    }
+
+    &__text {
+      padding: 0 0 0 60px;
+
+      &__line {
+        margin-bottom: 40px;
+      }
+
+      h1 {
+        line-height: 40px;
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        line-height: 25px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .image-intro-mobile {
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+
+  .intro {
+    height: 500px;
+    &__image--intro {
+      display: none;
+    }
+    &__pattern--left {
+      display: none;
+    }
+    &__pattern--right {
+      display: none;
+    }
+    &__pattern--left--mobile {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 180px;
+    }
+    &__pattern--right--mobile {
+      display: block;
+      position: absolute;
+      top: 350px;
+      right: 0;
+      height: 400px;
+    }
+
+    &__text {
+      align-items: center;
+      padding: 0 0 30px 0;
+
+      &__line {
+        width: 0;
+        height: 0;
+        margin: 0;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        line-height: 45px;
+        // margin: 0 0 20px 0;
+      }
+
+      p {
+        font-family: "Karla";
+        text-align: center;
+        font-size: 1rem;
+        line-height: 25px;
+        width: 85%;
+        padding: 0 30px;
+      }
+    }
+  }
+}
